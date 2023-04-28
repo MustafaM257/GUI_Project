@@ -39,7 +39,7 @@ public class SignUpController implements Initializable {
         button_login.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DB.changeScene(event,"sample.fxml","Log in !",null);
+                DB.changeScene(event,"Index.fxml","Log in !",null);
             }
         });
 

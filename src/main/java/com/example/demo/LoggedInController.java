@@ -24,7 +24,7 @@ public class LoggedInController implements Initializable {
         button_logout.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                DB.changeScene(actionEvent,"sample.fxml","Log in!",null);
+                DB.changeScene(actionEvent,"Index.fxml","Log in!",null);
             }
         });
     }

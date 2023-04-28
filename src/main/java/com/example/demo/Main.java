@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("sample.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Index.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Log In!");
         stage.setResizable(false);
@@ -19,8 +19,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-//        System.out.print("Debugging: ");
-//        System.out.println(Main.class.getResource("sample.fxml"));
 
         launch();
     }
