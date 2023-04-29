@@ -17,10 +17,15 @@
                 <Font name="Arial Rounded MT Bold" size="18.0" />
             </font>
         </Label>
-        <Button  fx:id="button_logout" layoutX="202.0" layoutY="257.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="155.0" style="-fx-background-color: #99CCFF;" text="Logout">
+        <Button fx:id="button_logout" layoutX="202.0" layoutY="257.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="155.0" style="-fx-background-color: #99CCFF;" text="Logout">
             <font>
                 <Font name="Arial Rounded MT Bold" size="18.0" />
             </font>
         </Button>
+      <Button fx:id="button_addtask" layoutX="202.0" layoutY="327.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="155.0" style="-fx-background-color: #99CCFF;" text="Add Task">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
