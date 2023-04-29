@@ -1,8 +1,9 @@
-package com.example.demo.TodoApp.Tasking;
+package com.example.demo;
 
 import java.time.LocalDate;
 
 public abstract class Task {
+    private int id;
     private String title;
     private String description;
     private LocalDate dueDate;
@@ -22,18 +23,9 @@ public abstract class Task {
     public void setDescription(String description){this.description=description;}
     public void setDueDate(LocalDate dueDate) {this.dueDate = dueDate;}
 
+    public int getId() {return this.id;}
+    public void setId(int id){this.id=id;}
 
-    public void saveToDatabase() {
-        // implementation to save the task to the database
-    }
-
-    public void deleteFromDatabase() {
-        // implementation to delete the task from the database
-    }
-
-    public void updateInDatabase() {
-        // implementation to update the task in the database
-    }
     @Override
     public String toString() {
         return "Task:\n" +
