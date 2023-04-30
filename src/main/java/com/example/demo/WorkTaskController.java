@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
@@ -76,10 +77,30 @@ public class WorkTaskController implements Initializable {
                         alert.showAndWait();
                         return;
                     } else {
-                        // Call the addTaskToDatabase() function if all fields have a value
-//                        addTaskToDatabase();
-                        System.out.println("Selected date: " + selectedDate.get());
-                        System.out.println("name: " + name.getText());
+                        DB DatabaseHelper= new DB();
+                        boolean success = DatabaseHelper.addTaskToDatabase(name.getText(), description.getText(), project.getText(), Date.valueOf(datePicker.getValue()), "Work", User.getInstance().getUserid());
+
+                        if (success) {
+                            // Display a success message
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Success");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Task created successfully.");
+                            alert.showAndWait();
+
+                            // Clear the form
+                            name.clear();
+                            description.clear();
+                            project.clear();
+                            datePicker.setValue(null);
+                        } else {
+                            // Display an error message
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Error");
+                            alert.setHeaderText(null);
+                            alert.setContentText("An error occurred while creating the task.");
+                            alert.showAndWait();
+                        }
                     }
             }
         });

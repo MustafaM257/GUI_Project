@@ -35,7 +35,7 @@
             <children>
                 <TextField fx:id="name" layoutX="14.0" layoutY="109.0" prefHeight="25.0" prefWidth="186.0" promptText="Enter Task Name" />
                 <TextField fx:id="description" layoutX="14.0" layoutY="161.0" prefHeight="43.0" prefWidth="186.0" promptText="Enter Task Description" />
-                <DatePicker fx:id="datePicker" layoutX="14.0" layoutY="231.0" mouseTransparent="true" prefHeight="25.0" prefWidth="186.0" promptText="Enter Task Start Date" />
+                <DatePicker fx:id="datePicker" layoutX="14.0" layoutY="231.0"  prefHeight="25.0" prefWidth="186.0" promptText="Enter Task Start Date" />
                 <Button fx:id="button_createtask" graphicTextGap="3.0" layoutX="15.0" layoutY="342.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="155.0" style="-fx-background-color: #99CCFF;" text="Create Task">
                     <font>
                         <Font name="Arial Rounded MT Bold" size="18.0" />
