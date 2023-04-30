@@ -1,16 +1,22 @@
 package com.example.demo;
 
+import java.util.Date;
+
 public class TaskFactory {
     public static Task createTask(String taskType) {
-        switch (taskType) {
-            case "work":
-                return new WorkTask();
-            case "personal":
-                return new PersonalTask();
-            case "shopping":
-                return new ShoppingTask();
-            default:
-                throw new IllegalArgumentException("Invalid task type: " + taskType);
-        }
+        return switch (taskType) {
+            case "work" -> new WorkTask();
+            case "personal" -> new PersonalTask();
+            case "shopping" -> new ShoppingTask();
+            default -> throw new IllegalArgumentException("Invalid task type: " + taskType);
+        };
+    }
+    public static Task createTask(String taskId , String taskTitle , String taskDescription , String taskSpeciality, Date taskDueDate,String taskType) {
+        return switch (taskType) {
+            case "work" -> new WorkTask(taskId, taskTitle, taskDueDate, taskSpeciality);
+            case "personal" -> new PersonalTask(taskId, taskTitle, taskDueDate, taskSpeciality);
+            case "shopping" -> new ShoppingTask(taskId,taskTitle,taskDueDate,taskSpeciality);
+            default -> throw new IllegalArgumentException("Invalid task type: " + taskType);
+        };
     }
 }

@@ -1,11 +1,12 @@
 package com.example.demo;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class ShoppingTask extends Task{
     private String store;
     public ShoppingTask(){};
-    protected ShoppingTask(String title, String description, LocalDate dueDate, String store) {
+    protected ShoppingTask(String title, String description, Date dueDate, String store) {
         super(title, description, dueDate);
         this.store = store;
     }
