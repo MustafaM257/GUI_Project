@@ -8,17 +8,9 @@ public class WorkTask extends Task {
     private String project;
     public WorkTask(){};
 
-    protected WorkTask(String title, String description, Date dueDate, String project) {
+    protected WorkTask(String title, String description, Date dueDate) {
         super(title, description, dueDate);
-        this.project = project;
+        this.speciality = "Work";
     }
-    public void setProject(String project) {this.project=project;}
-    public String getProject() {return this.project;}
-    @Override
-    public String toString() {
 
-        return super.toString()+
-                "project='" + project + '\'' +
-                '}';
-    }
 }

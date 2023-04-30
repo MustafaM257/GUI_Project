@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class DB {
@@ -153,15 +154,32 @@ public class DB {
         }
     }
     // now add ,remove , or delete tasks from database
-    public static boolean addTaskToDatabase(){
-        return false;
+    public static boolean addTaskToDatabase(String taskTitle, String taskDescription, String taskSpeciality, Date taskDueDate, String taskType, int userId) {
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/todolist", "root", "");
+            stmt = connection.prepareStatement("INSERT INTO tasks (taskTitle, taskDescription, taskSpeciality, taskDueDate, taskType, userid) VALUES (?, ?, ?, ?, ?, ?)");
+            stmt.setString(1, taskTitle);
+            stmt.setString(2, taskDescription);
+            stmt.setString(3, taskSpeciality);
+            stmt.setDate(4, taskDueDate);
+            stmt.setString(5, taskType);
+            stmt.setInt(6, userId);
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
+
     public static boolean removeTaskFromDatabase(int taskId){
         Connection connection = null;
         PreparedStatement stmt = null;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/todolist", "root", "");
-            stmt = connection.prepareStatement("DELETE FROM tasks WHERE id = ?");
+            stmt = connection.prepareStatement("DELETE FROM tasks WHERE taskId = ?");
             stmt.setInt(1, taskId);
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
@@ -170,73 +188,102 @@ public class DB {
             return false;
         }
     }
-    public static boolean modifyTaskFromDatabase(int taskId,String title , String description , Date dueDate){
+    public static boolean updateTaskInDatabase(int taskId, String taskTitle, String taskDescription, String taskSpeciality, Date taskDueDate, String taskType, int userId) {
         Connection connection = null;
         PreparedStatement stmt = null;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/todolist", "root", "");
-             stmt = connection.prepareStatement("UPDATE tasks SET title = ?, description = ?, dueDate = ? WHERE id = ?");
-            stmt.setString(1, title);
-            stmt.setString(2, description);
-            stmt.setDate(3, dueDate);
-            stmt.setInt(4, taskId);
-
+            stmt = connection.prepareStatement("UPDATE tasks SET taskTitle=?, taskDescription=?, taskSpeciality=?, taskDueDate=?, taskType=?, userId=? WHERE taskId=?");
+            stmt.setString(1, taskTitle);
+            stmt.setString(2, taskDescription);
+            stmt.setString(3, taskSpeciality);
+            stmt.setDate(4, taskDueDate);
+            stmt.setString(5, taskType);
+            stmt.setInt(6, userId);
+            stmt.setInt(7, taskId);
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
-
     }
     public static Task readTaskFromDatabase(int taskId){
         Connection connection = null;
         PreparedStatement stmt = null;
+        ResultSet rs = null;
+
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/todolist", "root", "");
-             stmt = connection.prepareStatement("SELECT * FROM tasks WHERE id = ?");
+            stmt = connection.prepareStatement("SELECT * FROM tasks WHERE taskId = ?");
             stmt.setInt(1, taskId);
+            rs = stmt.executeQuery();
 
-            ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                String title = rs.getString("title");
-                String description = rs.getString("description");
-                LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-//                return Task(taskId,title, description, dueDate);
-//                Factory
-            } else {
-                return null;
+                // Create a new task using the task factory
+                Task task = TaskFactory.createTask(rs.getString("taskType"));
+
+                // Set the task properties from the database result set
+                task.setId(rs.getInt("taskId"));
+                task.setTitle(rs.getString("taskTitle"));
+                task.setDescription(rs.getString("taskDescription"));
+                task.setDueDate(rs.getDate("taskDueDate"));
+                task.speciality = "taskType";
+                // Add the task to the list
+                return task;
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
         return null;
     }
-    public static ArrayList<Task> readTasksFromDatabase(){
+    public static List<Task> getTasksForSpecificUser(int userId) {
         Connection connection = null;
         PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Task> tasks = new ArrayList<>();
+
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/todolist", "root", "");
-
-            stmt = connection.prepareStatement("SELECT * FROM tasks");
-
-            ResultSet rs = stmt.executeQuery();
-            ArrayList<Task> tasks = new ArrayList<>();
+            stmt = connection.prepareStatement("SELECT * FROM tasks WHERE userid = ?");
+            stmt.setInt(1, userId);
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String title = rs.getString("title");
-                String description = rs.getString("description");
-                LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-//                tasks.add(new Task(id, title, description, dueDate));
-//                Factory
+                // Create a new task using the task factory
+                Task task = TaskFactory.createTask(rs.getString("taskType"));
+
+                // Set the task properties from the database result set
+                task.setId(rs.getInt("taskId"));
+                task.setTitle(rs.getString("taskTitle"));
+                task.setDescription(rs.getString("taskDescription"));
+                task.setDueDate(rs.getDate("taskDueDate"));
+                task.speciality = "taskType";
+                // Add the task to the list
+                tasks.add(task);
             }
 
-            return tasks;
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+
+        return tasks;
     }
+
 }

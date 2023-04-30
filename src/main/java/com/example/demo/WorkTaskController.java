@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,6 +15,11 @@ public class WorkTaskController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        button_createtask.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
 
+            }
+        });
     }
 }

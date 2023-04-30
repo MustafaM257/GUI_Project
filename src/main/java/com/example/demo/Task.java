@@ -8,6 +8,7 @@ public abstract class Task {
     private String title;
     private String description;
     private Date dueDate;
+    protected String speciality;
     protected Task(){};
 
     protected Task(String title, String description, Date dueDate) {
