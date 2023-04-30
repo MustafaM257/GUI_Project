@@ -33,8 +33,10 @@ public class LoggedInController implements Initializable {
         button_logout.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DB.changeScene(event,"Index.fxml","Log in!",null);
-
+//                DB.changeScene(event,"Index.fxml","Log in!",null);
+                User user = User.getInstance();
+                System.out.println(user.getUsername());
+                System.out.println(user.getUserid());
 
 
             }

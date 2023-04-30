@@ -21,6 +21,7 @@ public class DB {
         if(username != null){
             User user = User.getInstance();
             user.setUsername(username);
+            user.setUserid(DB.getUserId(username));
         }
         Parent root = null;
             try
@@ -285,5 +286,53 @@ public class DB {
 
         return tasks;
     }
+    // Function to retrieve user ID from database based on username
+    public static int getUserId(String username) {
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        int userId = 0;
 
+        try {
+            // Register JDBC driver
+            // Open a connection
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/todolist", "root", "");
+
+            // Prepare statement to retrieve user ID
+            String sql = "SELECT userid FROM users WHERE username=?";
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, username);
+
+            // Execute query and retrieve result
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                userId = rs.getInt("userid");
+            }
+            // Clean-up environment
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException se) {
+            // Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            // Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            // Finally block used to close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ignored) {
+            } // nothing we can do
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            } // end finally try
+        } // end try
+        return userId;
+    }
 }

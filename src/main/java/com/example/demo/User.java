@@ -6,6 +6,7 @@ public class User {
     private static User instance = null;
     private ArrayList<Task> tasks = null;
     private String username;
+    private int userid;
 
     private User() {
     }
@@ -26,5 +27,7 @@ public class User {
     }
 
     public void setTasks(ArrayList<Task> tasks ) { this.tasks=tasks;}
+    public int getUserid(){return this.userid;}
+    public void setUserid(int userid) {this.userid = userid;}
     public ArrayList<Task> getTasks(){return this.tasks;}
 }
