@@ -119,7 +119,7 @@ public class DisplayTasksController implements Initializable {
         grid.add(new Label("Description:"), 0, 1);
         grid.add(descriptionField, 1, 1);
         grid.add(new Label("Due Date:"), 0, 2);
-        grid.add(new DatePicker(), 1, 2);
+//        grid.add(new DatePicker(), 1, 2);
         grid.add(dueDateField, 1, 2);
         grid.add(new Label("Speciality:"), 0, 3);
         grid.add(specialityField, 1, 3);
@@ -128,10 +128,11 @@ public class DisplayTasksController implements Initializable {
         // Show the dialog and update the task object if the user clicked OK
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
-            DB.updateTaskInDatabase(task.getId(), dialog.getEditor().getText(),descriptionField.getText(),specialityField.getText(), Date.valueOf(dueDateField.getValue()),task.getType(),User.getInstance().getUserid());
+            DB.updateTaskInDatabase(task.getId(), dialog.getEditor().getText(),descriptionField.getText(),specialityField.getText(), (Date) task.getDueDate(),task.getType(),User.getInstance().getUserid());
             tasks = DB.getTasksForSpecificUser(User.getInstance().getUserid());
             tableView.setItems(tasks);
         }
+
     }
 
     private void deleteThing(Task thing,ObservableList<Task> tasks) {
