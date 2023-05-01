@@ -16,8 +16,6 @@ public class TaskTypeController implements Initializable {
     @FXML
     public Button button_worktask;
     @FXML
-    public Button button_view_tasks;
-    @FXML
     public Button button_shoppingtask;
     @FXML
     public Button button_personaltask;
@@ -28,14 +26,6 @@ public class TaskTypeController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 DB.changeScene(event,"LoggedIn.fxml","Welcome!",null);
-
-
-            }
-        });
-        button_view_tasks.setOnAction(new EventHandler<>() {
-            @Override
-            public void handle(ActionEvent event) {
-                DB.changeScene(event,"DisplayTasks.fxml","Your Tasks",null);
 
 
             }
