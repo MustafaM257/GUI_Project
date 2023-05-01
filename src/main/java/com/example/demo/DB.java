@@ -13,9 +13,8 @@ import javafx.collections.FXCollections;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class DB {
 
@@ -191,7 +190,7 @@ public class DB {
             return false;
         }
     }
-    public static boolean updateTaskInDatabase(int taskId, String taskTitle, String taskDescription, String taskSpeciality, Date taskDueDate, String taskType, int userId) {
+    public static boolean updateTaskInDatabase(int taskId, String taskTitle, String taskDescription, String taskSpeciality,  Date taskDueDate, String taskType, int userId) {
         Connection connection = null;
         PreparedStatement stmt = null;
         try {

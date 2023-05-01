@@ -60,8 +60,7 @@ public class ShoppingTaskController implements Initializable {
                     alert.showAndWait();
                     return;
                 } else {
-                    DB DatabaseHelper= new DB();
-                    boolean success = DatabaseHelper.addTaskToDatabase(name.getText(), description.getText(), store.getText(), Date.valueOf(datePicker.getValue()), "shopping", User.getInstance().getUserid());
+                    boolean success = DB.addTaskToDatabase(name.getText(), description.getText(), store.getText(), Date.valueOf(datePicker.getValue()), "shopping", User.getInstance().getUserid());
 
                     if (success) {
                         // Display a success message
