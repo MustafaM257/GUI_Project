@@ -61,7 +61,7 @@ public class PersonalTaskController implements Initializable {
                     return;
                 } else {
                     DB DatabaseHelper= new DB();
-                    boolean success = DatabaseHelper.addTaskToDatabase(name.getText(), description.getText(), priority.getText(), Date.valueOf(datePicker.getValue()), "Personal", User.getInstance().getUserid());
+                    boolean success = DatabaseHelper.addTaskToDatabase(name.getText(), description.getText(), priority.getText(), Date.valueOf(datePicker.getValue()), "personal", User.getInstance().getUserid());
 
                     if (success) {
                         // Display a success message

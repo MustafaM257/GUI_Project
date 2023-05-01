@@ -31,7 +31,7 @@
         </AnchorPane>
         <AnchorPane prefHeight="400.0" prefWidth="406.0">
             <children>
-                <Button fx:id="button_back" graphicTextGap="3.0" layoutX="121.0" layoutY="343.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="99.0" style="-fx-background-color: gray;" text="Back">
+                <Button fx:id="button_back" graphicTextGap="3.0" layoutX="248.0" layoutY="341.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="99.0" style="-fx-background-color: gray;" text="Back">
                     <font>
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                     </font>
@@ -60,6 +60,11 @@
                </font>
             </Button>
             <Button fx:id="button_shoppingtask" graphicTextGap="3.0" layoutX="93.0" layoutY="200.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="155.0" style="-fx-background-color: #99CCFF;" text="Shopping Task">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="button_view_tasks" graphicTextGap="3.0" layoutX="19.0" layoutY="341.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="130.0" style="-fx-background-color: #99CCFF;" text="View Tasks">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
