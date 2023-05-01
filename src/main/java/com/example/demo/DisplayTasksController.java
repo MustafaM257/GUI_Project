@@ -18,8 +18,11 @@ public class DisplayTasksController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        DB  databaseHelper = new DB();
-        ObservableList<Task> tasks = databaseHelper.getTasksForSpecificUser(User.getInstance().getUserid());
+        ObservableList<Task> tasks = DB.getTasksForSpecificUser(User.getInstance().getUserid());
+        System.out.println(tasks.get(0));
+        for(Task task : tasks) {
+            System.out.println(task);
+        }
         if(tasks != null) {
             TableColumn<Task, String> nameColumn = new TableColumn<>("Name");
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -30,12 +33,15 @@ public class DisplayTasksController implements Initializable {
             TableColumn<Task, String> dateColumn = new TableColumn<>("Due Date");
             dateColumn.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
 
-//            TableColumn<Task, String> specialityColumn = new TableColumn<>("Speciality");
-//            specialityColumn.setCellValueFactory(new PropertyValueFactory<>("speciality"));
+            TableColumn<Task, String> typeColumn = new TableColumn<>("Type");
+            typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+
+            TableColumn<Task, String> specialityColumn = new TableColumn<>("Speciality");
+            specialityColumn.setCellValueFactory(new PropertyValueFactory<>("speciality"));
 
 
             tableView.setItems((ObservableList<Task>) tasks);
-            tableView.getColumns().addAll(nameColumn, descriptionColumn,dateColumn);
+            tableView.getColumns().addAll(nameColumn, descriptionColumn,dateColumn,typeColumn,specialityColumn);
         }
     }
 
