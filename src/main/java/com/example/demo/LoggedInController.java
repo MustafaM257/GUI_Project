@@ -28,6 +28,8 @@ public class LoggedInController implements Initializable {
     @FXML
     private Label label_welcome;
     @FXML
+    public Button button_view_tasks;
+    @FXML
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         button_logout.setOnAction(new EventHandler<ActionEvent>() {
@@ -37,6 +39,14 @@ public class LoggedInController implements Initializable {
                 User user = User.getInstance();
                 System.out.println(user.getUsername());
                 System.out.println(user.getUserid());
+
+
+            }
+        });
+        button_view_tasks.setOnAction(new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DB.changeScene(event,"DisplayTasks.fxml","Your Tasks",null);
 
 
             }
