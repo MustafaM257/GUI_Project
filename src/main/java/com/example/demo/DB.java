@@ -231,7 +231,7 @@ public class DB {
                 task.setTitle(rs.getString("taskTitle"));
                 task.setDescription(rs.getString("taskDescription"));
                 task.setDueDate(rs.getDate("taskDueDate"));
-                task.speciality = "taskType";
+                task.setSpeciality(rs.getString("taskType"));
                 // Add the task to the list
                 return task;
             }
@@ -263,7 +263,7 @@ public class DB {
                 task.setTitle(rs.getString("taskTitle"));
                 task.setDescription(rs.getString("taskDescription"));
                 task.setDueDate(rs.getDate("taskDueDate"));
-                task.speciality = "taskType";
+                task.setSpeciality(rs.getString("taskSpeciality"));
                 // Add the task to the list
                 tasks.add(task);
             }
